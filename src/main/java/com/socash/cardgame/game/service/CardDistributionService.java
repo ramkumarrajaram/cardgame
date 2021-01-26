@@ -16,9 +16,12 @@ import static java.util.stream.IntStream.range;
 @AllArgsConstructor
 public class CardDistributionService {
 
+    private UniqueCardService uniqueCardService;
+
     public List<Player> getPlayers(int numberOfPlayers, LinkedList<String> cardValues, Map<String, Integer> cardCountMap) {
         return range(0, numberOfPlayers)
                 .mapToObj(i -> Player.builder()
+                        .index(i)
                         .cards(getCards(cardValues, cardCountMap))
                         .build())
                 .collect(Collectors.toList());
@@ -27,24 +30,7 @@ public class CardDistributionService {
     private List<String> getCards(LinkedList<String> cardValues, Map<String, Integer> cardCountMap) {
         //3 cards
         return range(0, 3)
-                .mapToObj(index -> findUniqueCard(cardValues, cardCountMap))
+                .mapToObj(index -> uniqueCardService.findUniqueCard(cardValues, cardCountMap))
                 .collect(Collectors.toList());
-    }
-
-    private String findUniqueCard(LinkedList<String> cardValues, Map<String, Integer> cardCountMap) {
-        int randomNum = ThreadLocalRandom.current().nextInt(0, 13);
-        String cardValue = cardValues.get(randomNum);
-        if (cardCountMap.containsKey(cardValue)) {
-            Integer cardCount = cardCountMap.get(cardValue);
-            if (cardCount < 4) {
-                cardCountMap.put(cardValue, cardCount + 1);
-            } else {
-                return findUniqueCard(cardValues, cardCountMap);
-            }
-        } else {
-            cardCountMap.put(cardValue, 1);
-        }
-
-        return cardValue;
     }
 }

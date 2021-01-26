@@ -10,10 +10,10 @@ import java.util.LinkedList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GameServiceTest {
+public class GameRunnerTest {
 
     @InjectMocks
-    private GameService subject;
+    private GameRunner subject;
 
     @Test
     public void name() {

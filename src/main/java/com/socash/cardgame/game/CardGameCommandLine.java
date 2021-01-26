@@ -1,6 +1,6 @@
 package com.socash.cardgame.game;
 
-import com.socash.cardgame.game.service.GameService;
+import com.socash.cardgame.game.service.GameRunner;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 @AllArgsConstructor
 public class CardGameCommandLine implements CommandLineRunner {
 
-    private GameService gameService;
+    private GameRunner gameRunner;
 
     @Override
     public void run(String... args) throws Exception {
@@ -26,7 +26,7 @@ public class CardGameCommandLine implements CommandLineRunner {
             numberOfPlayers = 4;
         }
 
-        System.out.println("The winner is : " + gameService.determineWinner(numberOfPlayers));
+        System.out.println("The winner is : " + gameRunner.determineWinner(numberOfPlayers));
 
     }
 }
