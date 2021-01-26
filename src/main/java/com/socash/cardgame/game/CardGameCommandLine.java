@@ -26,7 +26,6 @@ public class CardGameCommandLine implements CommandLineRunner {
             numberOfPlayers = 4;
         }
 
-        System.out.println("The winner is : " + gameRunner.determineWinner(numberOfPlayers));
-
+        System.out.println("The winner is person with Index: " + (gameRunner.determineWinner(numberOfPlayers) + 1));
     }
 }
